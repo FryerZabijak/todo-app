@@ -8,7 +8,7 @@ border-green-500
 border-red-500
 @endif
 ">
-    <h3>{{ $todo->title }}</h3>
+    <h3 class="text-center">{{ $todo->title }}</h3>
     <p><i class="fa-solid fa-tags"></i>&nbsp;{{ $todo->tags }}</p>
 
     @if ($todo->complete == 1) 

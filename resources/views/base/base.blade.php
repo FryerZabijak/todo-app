@@ -9,6 +9,7 @@
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     @vite('resources/css/app.css')
+    <script src="//unpkg.com/alpinejs" defer></script>
     <title>To Do App</title>
 </head>
 
@@ -18,18 +19,48 @@
             <h1 class="text-center text-5xl text-red-500">Laravel To-Do App</h1>
         </a>
 
-        <div class="cursor-pointer">
+        <div class="cursor-pointer flex justify-center gap-6">
             <a href="https://github.com/FryerZabijak/laravel_todo_app" target="_blank">
                 <i class="fa-brands fa-github"></i>
                 &nbsp;
                 <label>Source Code</label>
             </a>
+            @auth
+                <div>
+                    <i class="fa-solid fa-hand"></i>
+                    &nbsp;
+                    <label>Hello, {{ auth()->user()->name }}</label>
+                </div>
+                <a href="/logout">
+                    <i class="fa-solid fa-door-open"></i>
+                    &nbsp;
+                    <label>Logout</label>
+                </a>
+            @else
+                <a href="/login">
+                    <i class="fa-solid fa-user"></i>
+                    &nbsp;
+                    <label>Login</label>
+                </a>
+                <a href="/register">
+                    <i class="fa-solid fa-pencil"></i>
+                    &nbsp;
+                    <label>register</label>
+                </a>
+            @endauth
         </div>
 
         <div id="content" class="my-5">
             @yield('content')
         </div>
     </main>
+
+    @if (session()->has('message'))
+        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show"
+            class="fixed bottom-0 w-full bg-red-500 text-center">
+            {{ session('message') }}
+        </div>
+    @endif
 </body>
 
 </html>

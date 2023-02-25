@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TodoController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,13 @@ Route::get("/todo/create", [TodoController::class, "create"]);
 Route::post("/todo/create", [TodoController::class, "store"]);
 
 Route::get("/todo/{id}", [TodoController::class, "show"]);
+
+Route::get("/login", [UserController::class, "login"])->middleware("guest");
+
+Route::post("/authenticate", [UserController::class, "authenticate"])->middleware("guest");
+
+Route::get("/register", [UserController::class, "create"])->middleware("guest");
+
+Route::post("/register", [UserController::class, "store"])->middleware("guest");
+
+Route::get("/logout", [UserController::class, "logout"]);

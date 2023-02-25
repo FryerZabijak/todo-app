@@ -20,7 +20,10 @@ class TodoController extends Controller
     */
 
     public function index(){
-        $todos = Todo::latest("updated_at")->get();
+        $user = auth()->user();
+        if(!$user) return redirect("/login");
+        $todos = $user->todos;
+
         return view("pages.todo.index", [
             "todos" => $todos
         ]);
@@ -67,6 +70,8 @@ class TodoController extends Controller
             "tags" => "nullable|string",
             "content" => "nullable|string",
         ]);
+
+        $formFields["user_id"] = auth()->id();
 
         Todo::create($formFields);
 
