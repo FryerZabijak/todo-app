@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,11 +17,13 @@ class TodoFactory extends Factory
      */
     public function definition(): array
     {
-        $tags = ["home", "work", "friends", "family"];
+        $client = new Client();
+        $response = $client->get("http://www.boredapi.com/api/activity/");
+        $data = json_decode($response->getBody());
 
         return [
-            "title" => $this->faker->sentence(3),
-            "tags" => $tags[array_rand($tags)],
+            "title" => $data->activity,
+            "tags" => $data->type,
             "content" => $this->faker->sentence(15),
             "complete" => rand(0,1)
         ];

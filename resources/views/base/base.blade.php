@@ -12,10 +12,10 @@
     <title>To Do App</title>
 </head>
 
-<body>
+<body class="p-1">
     <main>
         <a href="/">
-            <h1 class="text-5xl text-red-500">Laravel To-Do App</h1>
+            <h1 class="text-center text-5xl text-red-500">Laravel To-Do App</h1>
         </a>
 
         <div class="cursor-pointer">

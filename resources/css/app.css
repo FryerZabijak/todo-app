@@ -7,6 +7,12 @@
     src: url("../fonts/Poppins-Regular.ttf");
 }
 
+@font-face {
+    font-family: "Poppins";
+    font-weight: bold;
+    src: url("../fonts/Poppins-Bold.ttf");
+}
+
 html{
     color-scheme: light dark;
 }
@@ -28,4 +34,8 @@ main{
 
 button, a{
     transition:.2s;
+}
+
+h1,h2,h3{
+    font-weight: bold;
 }
