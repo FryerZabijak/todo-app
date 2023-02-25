@@ -9,7 +9,7 @@ use Illuminate\Queue\Jobs\RedisJob;
 
 class TodoController extends Controller
 {
-        /*
+    /*
         index - show all
         show - show single
         create - show form to create
@@ -19,9 +19,10 @@ class TodoController extends Controller
         destroy - delete
     */
 
-    public function index(){
+    public function index()
+    {
         $user = auth()->user();
-        if(!$user) return redirect("/login");
+        if (!$user) return redirect("/login");
         $todos = $user->todos;
 
         return view("pages.todo.index", [
@@ -29,14 +30,17 @@ class TodoController extends Controller
         ]);
     }
 
-    public function show(int $id){
+    public function show(int $id)
+    {
         $todo = Todo::find($id);
+        if ($todo->user_id != auth()->id()) return redirect("/");
         return view("pages.todo.show", [
             "todo" => $todo
         ]);
     }
 
-    public function update(int $id){
+    public function update(int $id)
+    {
 
         $formFields = request()->validate([
             "title" => "required",
@@ -45,26 +49,33 @@ class TodoController extends Controller
             "complete" => ""
         ]);
 
-        if(isset($formFields["complete"]) && $formFields["complete"] =="on") $formFields["complete"]=1;
-        else $formFields["complete"]=0;
+        if (isset($formFields["complete"]) && $formFields["complete"] == "on") $formFields["complete"] = 1;
+        else $formFields["complete"] = 0;
 
         $todo = Todo::find($id);
+
+        if ($todo->user_id != auth()->id()) return redirect("/");
 
         $todo->update($formFields);
 
         return redirect("/");
     }
 
-    public function destroy(int $id){
+    public function destroy(int $id)
+    {
+        if (Todo::find($id)->user_id != auth()->id()) return redirect("/");
+
         Todo::destroy($id);
         return redirect("/");
     }
 
-    public function create(){
+    public function create()
+    {
         return view("pages.todo.create");
     }
 
-    public function store(){
+    public function store()
+    {
         $formFields = request()->validate([
             "title" => "required",
             "tags" => "nullable|string",

@@ -15,19 +15,19 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', [TodoController::class, "index"]);
+Route::get('/', [TodoController::class, "index"])->middleware("auth");
 
-Route::put("/todo/{id}", [TodoController::class, "update"]);
+Route::put("/todo/{id}", [TodoController::class, "update"])->middleware("auth");
 
-Route::delete("/todo/{id}", [TodoController::class, "destroy"]);
+Route::delete("/todo/{id}", [TodoController::class, "destroy"])->middleware("auth");
 
-Route::get("/todo/create", [TodoController::class, "create"]);
+Route::get("/todo/create", [TodoController::class, "create"])->middleware("auth");
 
-Route::post("/todo/create", [TodoController::class, "store"]);
+Route::post("/todo/create", [TodoController::class, "store"])->middleware("auth");
 
-Route::get("/todo/{id}", [TodoController::class, "show"]);
+Route::get("/todo/{id}", [TodoController::class, "show"])->middleware();
 
-Route::get("/login", [UserController::class, "login"])->middleware("guest");
+Route::get("/login", [UserController::class, "login"])->name("login")->middleware("guest");
 
 Route::post("/authenticate", [UserController::class, "authenticate"])->middleware("guest");
 
@@ -35,4 +35,4 @@ Route::get("/register", [UserController::class, "create"])->middleware("guest");
 
 Route::post("/register", [UserController::class, "store"])->middleware("guest");
 
-Route::get("/logout", [UserController::class, "logout"]);
+Route::get("/logout", [UserController::class, "logout"])->middleware("auth");
