@@ -58,7 +58,7 @@ class TodoController extends Controller
 
         $todo->update($formFields);
 
-        return redirect("/");
+        return redirect("/")->with("message", "You have successfully updated todo");;
     }
 
     public function destroy(int $id)
@@ -66,7 +66,7 @@ class TodoController extends Controller
         if (Todo::find($id)->user_id != auth()->id()) return redirect("/");
 
         Todo::destroy($id);
-        return redirect("/");
+        return redirect("/")->with("message", "You have successfully deleted todo");;
     }
 
     public function create()
@@ -86,6 +86,6 @@ class TodoController extends Controller
 
         Todo::create($formFields);
 
-        return redirect("/");
+        return redirect("/")->with("message", "You have successfully created todo");
     }
 }

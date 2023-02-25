@@ -1,5 +1,6 @@
 @extends('base.base')
 @section('content')
+    <a href="/"><i class="fa-solid fa-arrow-left"></i>&nbsp;Back</a><br>
     <label class="text-3xl text-center">Todo</label>
     <form method="post" action="/todo/{{$todo->id}}" class="flex flex-col gap-1">
         @csrf
