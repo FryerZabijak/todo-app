@@ -1,4 +1,4 @@
-# Todo aplikace v Laravel s použitím Tailwind CSS a Post CSS
+# Todo aplikace v Laravel
 
 Tento repositář obsahuje zdrojový kód todo aplikace v PHP frameworku Laravel. Aplikace umožňuje uživatelům vytvářet seznamy úkolů a jednotlivé úkoly v rámci těchto seznamů. Aplikace byla vyvinuta pomocí populárního frameworku Laravel a využívá Tailwind CSS pro stylování a Post CSS pro optimalizaci CSS.
 
