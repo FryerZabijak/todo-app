@@ -23,7 +23,7 @@ class TodoController extends Controller
     {
         $user = auth()->user();
         if (!$user) return redirect("/login");
-        $todos = $user->todos;
+        $todos = $user->todos->sortByDesc("updated_at");
 
         return view("pages.todo.index", [
             "todos" => $todos
